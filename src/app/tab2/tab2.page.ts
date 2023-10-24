@@ -1,12 +1,55 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Product } from '../models/product.model';
+import { ProductsService } from '../services/products.service';
 
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  styleUrls: ['tab2.page.scss'],
 })
-export class Tab2Page {
+export class Tab2Page implements OnInit {
+  addedProducts: Product[] = [];
+  total: number = 0;
+  productCounts: { [key: string]: number } = {};
 
-  constructor() {}
+  //Constructor
+  constructor(private productService: ProductsService) {}
+  ngOnInit() {
+    this.productService.addedProductsO.subscribe((products: Product[]) => {
+      this.addedProducts = products;
+    });
 
+    this.productService.totalO.subscribe((newTotal: number) => {
+      this.total = newTotal;
+    });
+
+    this.productService.productCountsO.subscribe(
+      (counts: { [key: string]: number }) => {
+        this.productCounts = counts;
+      }
+    );
+  }
+  removeProduct(index: number){
+    this.productService.removeProduct(index);
+  }
+  decrementProduct(index:number){
+    this.productService.decrementProduct(index);
+  }
+  incrementProduct(index:number){
+    this.productService.incrementProduct(index);
+  }
+  getColor(productType: string): string {
+    switch (productType) {
+      case 'Abarrotes':
+        return 'primary';
+      case 'Frutas y verduras':
+        return 'success';
+      case 'Limpieza':
+        return 'warning';
+      case 'Farmacia':
+        return 'danger';
+      default:
+        return '';
+    }
+  }
 }

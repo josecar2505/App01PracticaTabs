@@ -51,29 +51,4 @@
   </ion-content>
 </ion-content>
 
-<ion-footer collapse="fade">
-  <ion-toolbar *ngFor="let product of addedProducts; index as i">
-    <div></div>
-    <ion-item>
-      <ion-label>
-        {{product.name}}
-        {{product.price | currency}}
-      </ion-label>
-      <ion-button (click) = "removeProduct(i)">
-        <ion-icon name="trash-outline"></ion-icon>
-      </ion-button>
-      <ion-button (click) = "decrementProduct(i)">
-        <ion-icon name="remove-outline"></ion-icon>
-      </ion-button>
-      <ion-button (click) = "incrementProduct(i)">
-        <ion-icon name="add-outline"></ion-icon>
-      </ion-button>
-      
-      <ion-badge [color]="getColor(product.type)" slot="end">
-        Cantidad: {{productCounts[product.type]}}
-      </ion-badge>
-    </ion-item>
-  </ion-toolbar>
 
-  <div class="ion-padding">Total: {{total | currency}}</div>
-</ion-footer>
