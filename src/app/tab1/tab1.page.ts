@@ -49,10 +49,23 @@ export class Tab1Page {
       type: "Farmacia",
       description: "Lorem ipsum dolor sit amet",
     });
-    
+    this.products.push({
+      name: "Paracetamol",
+      photo: "https://picsum.photos/500/300?random",
+      price: 50,
+      type: "Farmacia",
+      description: "Lorem ipsum dolor sit amet",
+    });
+    this.products.push({
+      name: "Sandía",
+      photo: "https://picsum.photos/500/300?random",
+      price: 20,
+      type: "Frutas y verduras",
+      description: "Lorem ipsum dolor sit amet",
+    });
+
     this.productsFounds = this.products;
   }
-
 
 getColor(productType: string): string {
   switch (productType) {

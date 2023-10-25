@@ -20,13 +20,14 @@ export class ProductsService {
         if (!existingProduct) {
             this.addedProducts.push(productAdded);
         }
+
         this.total += productAdded.price;
 
         // Realiza un seguimiento de la cantidad de productos de cada tipo
-        if (this.productCounts.hasOwnProperty(productAdded.type)) {
-            this.productCounts[productAdded.type]++;
+        if (this.productCounts.hasOwnProperty(productAdded.name)) {
+            this.productCounts[productAdded.name]++;
         } else {
-            this.productCounts[productAdded.type] = 1;
+            this.productCounts[productAdded.name] = 1;
         }
         this.notificar();    
     }
@@ -36,7 +37,7 @@ export class ProductsService {
         const productToRemove = this.addedProducts[index];
 
         // Encuentra todas las instancias del producto que coinciden con el que deseas eliminar
-        const productsToRemove = this.productCounts[productToRemove.type];
+        const productsToRemove = this.productCounts[productToRemove.name];
 
         // Resta el precio de todas las instancias del producto eliminado del total
         this.total -= productToRemove.price * productsToRemove;
@@ -47,23 +48,23 @@ export class ProductsService {
         );
 
         // Actualiza la cantidad de productos de ese tipo
-        if (this.productCounts.hasOwnProperty(productToRemove.type)) {
-            this.productCounts[productToRemove.type] -= productsToRemove;
+        if (this.productCounts.hasOwnProperty(productToRemove.name)) {
+            this.productCounts[productToRemove.name] -= productsToRemove;
         }
         this.notificar();
     }
 
     incrementProduct(index: number): void {
         const product = this.addedProducts[index];
-        this.productCounts[product.type] += 1;
+        this.productCounts[product.name] += 1;
         this.total += product.price;
         this.notificar();
     }
 
     decrementProduct(index: number): void {
         const product = this.addedProducts[index];
-        if (this.productCounts[product.type] > 1) {
-            this.productCounts[product.type] -= 1;
+        if (this.productCounts[product.name] > 1) {
+            this.productCounts[product.name] -= 1;
             this.total -= product.price;
             this.notificar();
         }

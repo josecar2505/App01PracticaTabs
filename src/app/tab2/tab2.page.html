@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Resumen de su compra:
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,12 +12,6 @@
       <ion-title size="large">Tab 2</ion-title>
     </ion-toolbar>
   </ion-header>
-  
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
-</ion-content>
-
-<ion-footer collapse="fade">
   <ion-toolbar *ngFor="let product of addedProducts; index as i">
     <div></div>
     <ion-item>
@@ -37,10 +31,13 @@
         <ion-icon name="add-outline"></ion-icon>
       </ion-button>
       <ion-badge [color]="getColor(product.type)" slot="end">
-        Cantidad: {{productCounts[product.type]}}
+        Cantidad: {{productCounts[product.name]}}
       </ion-badge>
     </ion-item>
   </ion-toolbar>
 
+</ion-content>
+
+<ion-footer collapse="fade">
   <div class="ion-padding">Total: {{total | currency}}</div>
 </ion-footer>
