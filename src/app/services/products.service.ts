@@ -6,6 +6,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class ProductsService {
     addedProducts: Product[] = [];
     _addedProductsO = new BehaviorSubject<Product[]>([]);
+    favorites:Product[]=[];
+    _favoritesO = new BehaviorSubject<Product[]>([]);
     total = 0;
     _totalO = new BehaviorSubject<number>(0);
     productCounts: { [key: string]: number } = {};
@@ -30,6 +32,15 @@ export class ProductsService {
             this.productCounts[productAdded.name] = 1;
         }
         this.notificar();    
+    }
+    addFavorites(newFavorit:Product):void{
+        const existingProduct = this.favorites.find(
+            (product) => product.name === newFavorit.name
+        );
+        if(!existingProduct){
+            this.favorites.push(newFavorit);
+        }
+        this._favoritesO.next(this.favorites);
     }
 
     
@@ -82,6 +93,7 @@ export class ProductsService {
     addedProductsO:Observable<Product[]>=this._addedProductsO.asObservable();
     totalO:Observable<number> = this._totalO.asObservable();
     productCountsO: Observable<{[key:string]:number}> = this._productCountsO.asObservable();
+    favoritesO:Observable<Product[]>=this._favoritesO.asObservable();
     /*
      **/
 }

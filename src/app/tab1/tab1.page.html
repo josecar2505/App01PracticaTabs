@@ -44,6 +44,7 @@
             </ion-card-header>
             <ion-card-content> {{product.description}} </ion-card-content>
             <ion-button (click)="addProducts(product)">Agregar</ion-button>
+            <ion-button data-value="true" (click)="addFavorites(product)" color="success" ><ion-icon name="star"></ion-icon></ion-button>
           </ion-card>
         </ion-col>
       </ion-row>

@@ -84,6 +84,9 @@ getColor(productType: string): string {
 public addProducts(ProductAdded: Product){
   this.productService.addProducts(ProductAdded);
 }
+public addFavorites(newFavorite:Product){
+  this.productService.addFavorites(newFavorite);
+}
   public filterProducts():void{
     console.log(this.filter);
     this.productsFounds = this.products.filter(
