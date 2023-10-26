@@ -18,6 +18,9 @@ export class Tab3Page implements OnInit {
   public addProducts(ProductAdded: Product){
     this.productService.addProducts(ProductAdded);
   }
+  public removeFavorites(index:number){
+    this.productService.removedFavorites(index);
+  }
   getColor(productType: string): string {
     switch (productType) {
       case 'Abarrotes':

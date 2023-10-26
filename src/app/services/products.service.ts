@@ -42,8 +42,10 @@ export class ProductsService {
         }
         this._favoritesO.next(this.favorites);
     }
-
-    
+    removedFavorites(index:number):void{
+        this.favorites.splice(index,1);
+        this._favoritesO.next(this.favorites)
+    }
     removeProduct(index: number): void {
         const productToRemove = this.addedProducts[index];
 
