@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
+    <ion-title style="font-weight: bold;">
       Resumen de su compra:
     </ion-title>
   </ion-toolbar>
@@ -15,6 +15,7 @@
   <ion-toolbar *ngFor="let product of addedProducts; index as i">
     <div></div>
     <ion-item>
+      <img [src]="product.photo+i" width="50" height="50" />
       <ion-label>
         {{product.name}}
         {{product.price | currency}}
@@ -39,5 +40,5 @@
 </ion-content>
 
 <ion-footer collapse="fade">
-  <div class="ion-padding">Total: {{total | currency}}</div>
+  <div class="ion-padding" style="font-weight: bold;">Total: {{total | currency}}</div>
 </ion-footer>
