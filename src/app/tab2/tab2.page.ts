@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../models/product.model';
 import { ProductsService } from '../services/products.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -13,7 +14,7 @@ export class Tab2Page implements OnInit {
   productCounts: { [key: string]: number } = {};
 
   //Constructor
-  constructor(private productService: ProductsService) {}
+  constructor(private router:Router ,private productService: ProductsService) {}
   ngOnInit() {
     this.productService.addedProductsO.subscribe((products: Product[]) => {
       this.addedProducts = products;
@@ -37,6 +38,18 @@ export class Tab2Page implements OnInit {
   }
   incrementProduct(index:number){
     this.productService.incrementProduct(index);
+  }
+  addCars(Products:Product[],Total:number){
+    
+    this.productService.addcars(({
+      shoppingDate:new Date(),
+      total:Total,
+      products:Products
+    }));
+    this.redirectToTab();
+  }
+  redirectToTab(){
+    this.router.navigate(['/tabs/tab4'])
   }
   getColor(productType: string): string {
     switch (productType) {
