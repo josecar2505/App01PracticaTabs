@@ -20,8 +20,6 @@
         {{product.name}}
         {{product.price | currency}}
       </ion-label>
-      
-      
       <ion-button (click) = "removeProduct(i)">
         <ion-icon name="trash-outline"></ion-icon>
       </ion-button>
@@ -41,4 +39,8 @@
 
 <ion-footer collapse="fade">
   <div class="ion-padding" style="font-weight: bold;">Total: {{total | currency}}</div>
+  <div class="ion-padding" style="float: left;">Total: {{total | currency}}</div>
+  <ion-button (click)="addCars(addedProducts,total)" color="success" style="float: right;">
+    <ion-icon name="card-outline"></ion-icon>
+  </ion-button>
 </ion-footer>

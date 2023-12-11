@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../models/product.model';
 import { ProductsService } from '../services/products.service';
 import { Route, Router } from '@angular/router';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -14,6 +15,7 @@ export class Tab2Page implements OnInit {
   productCounts: { [key: string]: number } = {};
 
   //Constructor
+  constructor(private router:Router ,private productService: ProductsService) {}
   constructor(private router:Router ,private productService: ProductsService) {}
   ngOnInit() {
     this.productService.addedProductsO.subscribe((products: Product[]) => {
