@@ -8,8 +8,24 @@
     ],
     "rewrites": [
       {
-        "source": "**",
+        "source": "/tab1/**",
         "destination": "/index.html"
+      },
+      {
+        "source": "/tab2/**",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/tab3/**",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/tab4/**",
+        "destination": "/index.html"
+      },
+      {
+        "source": "**",
+        "destination": "/404.html"
       }
     ]
   }

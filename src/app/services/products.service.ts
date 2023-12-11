@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { car } from '../models/car.models';
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
     addedProducts: Product[] = [];
     _addedProductsO = new BehaviorSubject<Product[]>([]);
+    addedcar: car[] = [];
+    _addedcarO = new BehaviorSubject<car[]>([]);
     favorites:Product[]=[];
     _favoritesO = new BehaviorSubject<Product[]>([]);
     total = 0;
     _totalO = new BehaviorSubject<number>(0);
     productCounts: { [key: string]: number } = {};
     _productCountsO = new BehaviorSubject<{ [key: string]: number }>({});
+    
 
     addProducts(productAdded: Product): void {
         
@@ -41,6 +45,16 @@ export class ProductsService {
             this.favorites.push(newFavorit);
         }
         this._favoritesO.next(this.favorites);
+    }
+    addcars(newcar:car):void{
+        console.log(newcar);
+        const existingcar = this.addedcar.find(
+            (car) => car.shoppingDate === newcar.shoppingDate
+        );
+            if(!existingcar){
+            this.addedcar.push(newcar);
+        }
+        this._addedcarO.next(this.addedcar);
     }
     removedFavorites(index:number):void{
         this.favorites.splice(index,1);
@@ -89,13 +103,26 @@ export class ProductsService {
         this._productCountsO.next(this.productCounts);
     }
 
+    resetCart(): void {
+        this.addedProducts = [];
+        this._addedProductsO.next(this.addedProducts);
+
+        this.total = 0;
+        this._totalO.next(this.total);
+
+        this.productCounts = {};
+        this._productCountsO.next(this.productCounts);
+    }
+
     /**Observables
      * Usados para mostrar cambios en tiempo real
      */
+    addedcarO:Observable<car[]>=this._addedcarO.asObservable();
     addedProductsO:Observable<Product[]>=this._addedProductsO.asObservable();
     totalO:Observable<number> = this._totalO.asObservable();
     productCountsO: Observable<{[key:string]:number}> = this._productCountsO.asObservable();
     favoritesO:Observable<Product[]>=this._favoritesO.asObservable();
+
     /*
      **/
 }
